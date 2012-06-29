@@ -1,0 +1,39 @@
+(ns tree-data.core-test
+  (:use clojure.test
+        tree-data.core))
+
+(def categories
+  '(("1.1" "Network" nil)
+    ("1.2" "Beehive" 
+     (("1.2.1" "Workspaces" nil)
+     ("1.2.2" "Passwords" nil))
+     ))
+  )
+(def parent-id "2.1")
+(def new-node "Wikis")
+(def new-tree (add-child-node categories parent-id new-node))
+(def list-of-lists '(("a" 1)("b" 2) ("c" 3)))
+(def top-level-ids (get-top-level-ids lol))
+
+
+;; (deftest add-child-node-test
+;;   (testing "Adding a child node to a given tree under a specified parent."
+;;     (let [parent "2.1"
+;;           new-node ("Wikis")
+;;           new-tree (add-child-node parent new-node)]
+;;       (is (= "Wikis" (new-tree "2.1.1")))      
+;;       )))
+
+;;       (is (= ("a" "b") top-level-ids))
+
+(deftest get-top-level-ids-test
+  (testing "Given a list of lists extract the first element of each list"
+    (let [lol '(("a" 1)("b" 2))
+          top-level-ids (get-top-level-ids lol)
+          should-be '("a" "b")]
+      (println top-level-ids)
+      (println should-be)
+      (println (= should-be top-level-ids))
+      )))
+
+       
